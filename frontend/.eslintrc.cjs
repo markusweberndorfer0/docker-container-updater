@@ -3,6 +3,13 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  'rules': {
+    'no-console': 'error',
+    'no-unused-vars': 'error',
+    'no-var': 'error',
+    "@typescript-eslint/no-explicit-any": "error",
+    "semi": "error"
+  },
   'extends': [
     'plugin:vue/vue3-essential',
     'eslint:recommended',

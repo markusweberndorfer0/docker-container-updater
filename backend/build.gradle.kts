@@ -42,6 +42,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 }
 
 kotlin {

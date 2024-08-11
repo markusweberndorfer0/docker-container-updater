@@ -13,8 +13,8 @@
             <div v-bind="props">More</div>
           </template>
           <v-list>
-            <v-list-item v-for="(item, index) in ['1', '2']" :key="index" :value="index">
-              <v-list-item-title>{{ item }}</v-list-item-title>
+            <v-list-item @click="onLogout()">
+              <v-list-item-title>Logout</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import axios from 'axios';
 
 const navbarVisible = ref(true);
 
@@ -35,6 +36,10 @@ onMounted(() => {
     navbarVisible.value = false;
   }
 });
+
+function onLogout() {
+  axios.post('/logout');
+}
 </script>
 
 <style scoped lang="scss">

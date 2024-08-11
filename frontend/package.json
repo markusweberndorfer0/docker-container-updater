@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:watch": "nodemon --exec \"vite build\" --watch src/ -e ts,vue,js,scss,css",
     "preview": "vite preview",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
@@ -18,6 +19,7 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "axios": "^1.7.3",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",

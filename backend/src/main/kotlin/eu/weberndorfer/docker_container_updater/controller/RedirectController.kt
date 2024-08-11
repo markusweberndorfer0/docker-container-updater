@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class RedirectController {
-    @GetMapping(value = ["/{regex:\\w+}", "/**/{regex:\\w+}", "/**/{regex:\\w+/}"])
+    @GetMapping(value = ["/{regex:\\w+}", "/**/{regex:\\w+}"])
     fun forward(): String {
         return "forward:/"
     }

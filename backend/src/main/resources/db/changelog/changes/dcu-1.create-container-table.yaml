@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-update-table
+      author: mweberndorfer
+      changes:
+        - createTable:
+            tableName: updates
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: container_name
+                  type: varchar(1024)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: container_image
+                  type: varchar(1024)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_available
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: local_etag
+                  type: varchar(1024)
+              - column:
+                  name: remote_etag
+                  type: varchar(1024)
+              - column:
+                  name: last_updated
+                  type: timestamp
+                  defaultValueComputed: NOW()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+                  defaultValue: NOW()
+                  constraints:
+                    nullable: false

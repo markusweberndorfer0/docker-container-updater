@@ -357,3 +357,6 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/vue,vuejs,node,intellij,visualstudiocode,kotlin,gradle,java
+
+# privatekey
+/backend/src/main/resources/private_key/

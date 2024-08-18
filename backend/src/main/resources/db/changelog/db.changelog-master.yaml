@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: /db/changelog/changes/dcu-1.create-container-table.yaml
+  - include:
+      file: /db/changelog/changes/dcu-4.pull-data-periodically.yaml

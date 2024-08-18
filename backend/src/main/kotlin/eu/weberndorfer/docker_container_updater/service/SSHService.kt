@@ -1,5 +1,9 @@
 package eu.weberndorfer.docker_container_updater.service
 
 interface SSHService {
-    fun establishSSHConnection(): String
+    fun initConnection()
+
+    fun closeConnection()
+
+    fun execCommand(command: String): String
 }

@@ -9,6 +9,7 @@ import eu.weberndorfer.docker_container_updater.service.DockerService
 import eu.weberndorfer.docker_container_updater.service.SSHService
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.reactive.function.client.WebClient
 import java.net.URI
 import java.time.Instant
@@ -25,6 +26,7 @@ class DockerServiceImpl(
     private final val defaultDockerNamespace = "library"
     private final val dockerTagBaseUrl = "https://hub.docker.com"
 
+    @Transactional(readOnly = false)
     override fun syncContainersWithDatabase(): Boolean {
         log.info { "Syncing docker containers between local database and server" }
 
@@ -46,15 +48,22 @@ class DockerServiceImpl(
                 .replace(Regex("^.*@"), ""))
         }
 
-        var container: DockerContainer?
         val containers: MutableList<Container> = containerRepository.findAll()
+
+        var localEtag: String
+        var remoteEtag: String
+        var container: DockerContainer?
 
         containers.reversed().forEach {
             container = dockerContainers.find { container -> container.name == it.containerName }
 
             if (container !== null) {
-                it.localEtag = getLocalEtag(it.containerImage)
-                it.remoteEtag = getRemoteEtag(it.containerImage)
+                localEtag = getLocalEtag(it.containerImage)
+                remoteEtag = getRemoteEtag(it.containerImage)
+
+                it.localEtag = localEtag
+                it.remoteEtag = remoteEtag
+                it.updateAvailable = checkIfUpdateAvailable(localEtag, remoteEtag)
 
                 dockerContainers.remove(container)
             } else {
@@ -63,14 +72,17 @@ class DockerServiceImpl(
         }
 
         dockerContainers.forEach {
+            localEtag = getLocalEtag(it.image)
+            remoteEtag = getRemoteEtag(it.image)
+
             containers.add(
                 Container(
                     id = -1,
                     containerName = it.name,
                     containerImage = it.image,
-                    updateAvailable = false,
-                    localEtag = getLocalEtag(it.image),
-                    remoteEtag = getRemoteEtag(it.image),
+                    updateAvailable = checkIfUpdateAvailable(localEtag, remoteEtag),
+                    localEtag = localEtag,
+                    remoteEtag = remoteEtag,
                     lastUpdated = Instant.now(),
                     created = Instant.now()
                 )
@@ -79,7 +91,13 @@ class DockerServiceImpl(
 
         sshService.closeConnection()
 
+        containerRepository.saveAll(containers)
+
         return true
+    }
+
+    private fun checkIfUpdateAvailable(localEtag: String, remoteEtag: String): Boolean {
+        return localEtag == remoteEtag
     }
 
     private fun getLocalEtag(imageName: String): String {

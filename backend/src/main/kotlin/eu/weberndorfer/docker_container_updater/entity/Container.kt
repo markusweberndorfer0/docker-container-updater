@@ -3,11 +3,11 @@ package eu.weberndorfer.docker_container_updater.entity
 import jakarta.persistence.*
 import java.time.Instant
 
-@Entity
+@Entity(name = "Container")
 @Table(name = "containers")
 class Container(
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Long,
 

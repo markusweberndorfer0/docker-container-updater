@@ -4,5 +4,5 @@ import org.springframework.web.bind.annotation.GetMapping
 
 interface UpdateApi : BaseApi {
     @GetMapping("/updates")
-    fun getAllUpdates(): Long
+    fun getAllUpdates(): Boolean
 }

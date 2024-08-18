@@ -4,8 +4,8 @@ import jakarta.persistence.*
 import java.time.Instant
 
 @Entity
-@Table(name = "updates")
-class Update(
+@Table(name = "containers")
+class Container(
     @Id
     @GeneratedValue
     @Column(name = "id")

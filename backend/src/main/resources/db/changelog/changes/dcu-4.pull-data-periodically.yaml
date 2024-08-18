@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: pull-data-periodically
+      author: mweberndorfer
+      changes:
+        - renameTable:
+            oldTableName: updates
+            newTableName: containers
+        - modifyDataType:
+            tableName: containers
+            columnName: update_available
+            newDataType: bit
+        - addUniqueConstraint:
+            tableName: containers
+            columnNames: container_name

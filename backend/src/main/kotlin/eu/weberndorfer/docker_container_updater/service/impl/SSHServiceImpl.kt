@@ -12,32 +12,43 @@ import java.io.InputStreamReader
 
 @Service
 class SSHServiceImpl(
-    private val sshProperties: SSHProperties
+    private val sshProperties: SSHProperties,
 ) : SSHService {
-    override fun establishSSHConnection(): String {
-        val ssh = SSHClient()
-        val privateKey = ssh.loadKeys(ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + sshProperties.privateKeyFilePath).path)
+    private var sshClient = SSHClient()
+    private val privateKeyProvider = sshClient.loadKeys(ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + sshProperties.privateKeyFilePath).path)
 
-        ssh.addHostKeyVerifier(PromiscuousVerifier())
-        ssh.connect(sshProperties.host, sshProperties.port)
-        ssh.authPublickey(sshProperties.username, privateKey)
+    override fun initConnection() {
+        sshClient = SSHClient()
 
-        val sshSession = ssh.startSession()
+        sshClient.addHostKeyVerifier(PromiscuousVerifier())
+        sshClient.connect(sshProperties.host, sshProperties.port)
+        sshClient.authPublickey(sshProperties.username, privateKeyProvider)
+    }
 
-        val cmd = sshSession.exec("ls -la")
+    override fun closeConnection() {
+        sshClient.disconnect()
+        sshClient.close()
+    }
 
-        val list: MutableList<String> = mutableListOf()
+    override fun execCommand(command: String): String {
+        initConnection()
 
-        val reader = BufferedReader(InputStreamReader(cmd.inputStream))
+        val sshSession = sshClient.startSession()
+        val commandReturn = sshSession.exec(command)
+
+        val returnLinesList: MutableList<String> = mutableListOf()
+
+        val reader = BufferedReader(InputStreamReader(commandReturn.inputStream))
         var line: String?
+
         while ((reader.readLine().also { line = it }) != null) {
-            line?.let { list.add(it) }
+            line?.let { returnLinesList.add(it) }
         }
 
-        ssh.close()
         sshSession.close()
-        cmd.close()
 
-        return list.joinToString(separator = "\n")
+        closeConnection()
+
+        return returnLinesList.joinToString(separator = "\n")
     }
 }

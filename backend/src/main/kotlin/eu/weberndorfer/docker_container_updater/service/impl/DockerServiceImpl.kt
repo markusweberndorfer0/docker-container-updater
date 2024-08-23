@@ -16,9 +16,9 @@ import java.time.Instant
 
 @Service
 class DockerServiceImpl(
-        val sshService: SSHService,
-        val objectMapper: ObjectMapper,
-        val containerRepository: ContainerRepository
+    val sshService: SSHService,
+    val objectMapper: ObjectMapper,
+    val containerRepository: ContainerRepository
 ): DockerService {
     private val log = KotlinLogging.logger {  }
 

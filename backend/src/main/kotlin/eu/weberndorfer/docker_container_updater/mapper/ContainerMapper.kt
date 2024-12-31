@@ -2,7 +2,9 @@ package eu.weberndorfer.docker_container_updater.mapper
 
 import eu.weberndorfer.docker_container_updater.api.model.ContainerModel
 import eu.weberndorfer.docker_container_updater.entity.Container
+import org.springframework.stereotype.Service
 
+@Service
 class ContainerMapper {
     fun map(container: Container): ContainerModel {
         return ContainerModel(

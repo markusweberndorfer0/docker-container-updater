@@ -2,6 +2,7 @@ import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
     id("com.github.node-gradle.node") version "7.0.2"
+    id("org.openapi.generator") version "6.6.0"
 }
 
 node {
@@ -14,4 +15,10 @@ tasks.register<NpmTask>("build") {
     args.set(listOf("run", "build"))
 
     dependsOn("npm_install")
+}
+
+openApiGenerate {
+    generatorName.set("typescript-fetch")
+    inputSpec.set("$rootDir/frontend/src/api/openapi.yaml")
+    outputDir.set("$rootDir/frontend/src/api")
 }

@@ -1,9 +1,28 @@
 @use "palette";
 
 * {
-  font-family: Arial, serif;
+  font-family: Roboto, Arial, serif;
 }
 
 body {
   margin: 0;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    align-self: center;
+
+    width: 60%;
+  }
+}
+
+h1 {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: palette.$text-color;
 }

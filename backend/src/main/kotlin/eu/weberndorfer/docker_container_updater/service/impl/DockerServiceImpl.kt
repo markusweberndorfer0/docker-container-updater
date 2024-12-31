@@ -54,6 +54,7 @@ class DockerServiceImpl(
         var remoteEtag: String
         var container: DockerContainer?
 
+        // remove containers which don't exist anymore and update others
         containers.reversed().forEach {
             container = dockerContainers.find { container -> container.name == it.containerName }
 
@@ -71,6 +72,7 @@ class DockerServiceImpl(
             }
         }
 
+        // create newly added containers
         dockerContainers.forEach {
             localEtag = getLocalEtag(it.image)
             remoteEtag = getRemoteEtag(it.image)

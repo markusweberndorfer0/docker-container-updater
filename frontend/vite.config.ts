@@ -11,5 +11,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    watch: process.env.VITE_BUILD_WATCH === 'false' ? null : {}
   }
 });

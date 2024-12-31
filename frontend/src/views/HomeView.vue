@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ContainerComponent from '@/components/ContainerComponent.vue';
+</script>
 
-<template>Nothing to show here</template>
+<template>
+  <ContainerComponent></ContainerComponent>
+</template>
 
 <style scoped lang="scss"></style>

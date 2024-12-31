@@ -7,7 +7,7 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/3.3.2/865979850b50f57caf2a9b144b8741970a017543/spring-boot-configuration-processor-3.3.2.jar" />
         </processorPath>
-        <module name="docker-container-updater.backend.main" />
+        <module name="eu.weberndorfer.docker-container-updater.backend.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />

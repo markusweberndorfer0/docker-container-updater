@@ -360,3 +360,4 @@ gradle-app.setting
 
 # privatekey
 /backend/src/main/resources/private_key/
+/frontend/src/api/

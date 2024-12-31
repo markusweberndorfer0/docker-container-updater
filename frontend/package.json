@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "build:watch": "nodemon --exec \"vite build\" --watch src/ -e ts,vue,js,scss,css",
+    "build": "cross-env VITE_BUILD_WATCH=false run-p type-check \"build-only {@}\" --",
+    "build:watch": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
@@ -33,6 +33,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "cross-env": "^7.0.3",
     "cypress": "^13.12.0",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^3.3.0",
@@ -44,7 +45,7 @@
     "sass": "^1.77.8",
     "start-server-and-test": "^2.0.4",
     "typescript": "~5.4.0",
-    "vite": "^5.3.1",
+    "vite": "^5.4.6",
     "vite-plugin-vue-devtools": "^7.3.1",
     "vue-tsc": "^2.0.21"
   },

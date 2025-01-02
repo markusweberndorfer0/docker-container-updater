@@ -14,4 +14,8 @@ class ContainerController(val containerService: ContainerService) : ContainerApi
     override fun getContainer(id: Long): ContainerModel? {
         return containerService.getContainer(id)
     }
+
+    override fun syncContainers() {
+        return containerService.syncContainers()
+    }
 }

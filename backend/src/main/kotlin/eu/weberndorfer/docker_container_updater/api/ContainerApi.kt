@@ -4,6 +4,7 @@ import eu.weberndorfer.docker_container_updater.api.model.ContainerModel
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 
 @Tag(name="Container")
 interface ContainerApi : BaseApi {
@@ -12,4 +13,7 @@ interface ContainerApi : BaseApi {
 
     @GetMapping("/container/{id}")
     fun getContainer(@PathVariable id: Long): ContainerModel?
+
+    @PostMapping("/sync-containers")
+    fun syncContainers()
 }

@@ -19,10 +19,11 @@ class DockerServiceImpl(
     val sshService: SSHService,
     val objectMapper: ObjectMapper,
     val containerRepository: ContainerRepository
-): DockerService {
-    private val log = KotlinLogging.logger {  }
+) : DockerService {
+    private val log = KotlinLogging.logger { }
 
-    private final val dockerContainersCmd = "docker container ls -a --format '{ \"name\": {{ json .Names }}, \"image\": {{ json .Image }} }'"
+    private final val dockerContainersCmd =
+        "docker container ls -a --format '{ \"name\": {{ json .Names }}, \"image\": {{ json .Image }} }'"
     private final val defaultDockerNamespace = "library"
     private final val dockerTagBaseUrl = "https://hub.docker.com"
 
@@ -44,8 +45,10 @@ class DockerServiceImpl(
         val dockerLocalImages: MutableList<String> = mutableListOf()
         dockerContainers.forEach {
             dockerLocalImageJson = sshService.execCommand(getDockerImageCmd(it.image))
-            dockerLocalImages.add(objectMapper.readValue(dockerLocalImageJson, Array<String>::class.java)[0]
-                .replace(Regex("^.*@"), ""))
+            dockerLocalImages.add(
+                objectMapper.readValue(dockerLocalImageJson, Array<String>::class.java)[0]
+                    .replace(Regex("^.*@"), "")
+            )
         }
 
         val containers: MutableList<Container> = containerRepository.findAll()
@@ -99,7 +102,7 @@ class DockerServiceImpl(
     }
 
     private fun checkIfUpdateAvailable(localEtag: String, remoteEtag: String): Boolean {
-        return localEtag == remoteEtag
+        return localEtag != remoteEtag
     }
 
     private fun getLocalEtag(imageName: String): String {

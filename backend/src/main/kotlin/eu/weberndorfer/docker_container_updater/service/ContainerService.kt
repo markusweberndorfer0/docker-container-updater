@@ -6,4 +6,6 @@ interface ContainerService {
     fun getAllContainers(): List<ContainerModel>
 
     fun getContainer(id: Long): ContainerModel?
+
+    fun syncContainers()
 }

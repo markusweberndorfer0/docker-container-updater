@@ -47,7 +47,7 @@
     "typescript": "~5.7.2",
     "vite": "^5.4.6",
     "vite-plugin-vue-devtools": "^7.6.8",
-    "vue-tsc": "^2.0.21"
+    "vue-tsc": "^2.2.0"
   },
   "lint-staged": {
     "*.vue,*.js,*.jsx,*.cjs,*.mjs,*.ts,*.tsx,*.cts,*.mts": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"

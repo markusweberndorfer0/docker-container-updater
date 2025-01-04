@@ -3,7 +3,7 @@ import ContainerComponent from '@/components/ContainerComponent.vue';
 </script>
 
 <template>
-  <ContainerComponent></ContainerComponent>
+  <ContainerComponent />
 </template>
 
 <style scoped lang="scss"></style>

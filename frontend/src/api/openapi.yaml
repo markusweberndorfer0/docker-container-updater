@@ -6,17 +6,77 @@ servers:
   - url: http://localhost:8081
     description: Generated server url
 paths:
-  /api/updates:
+  /api/sync-containers:
+    post:
+      tags:
+        - Container
+      operationId: syncContainers
+      responses:
+        "200":
+          description: OK
+  /api/containers:
     get:
       tags:
-        - Update
-      operationId: getAllUpdates
+        - Container
+      operationId: getAllContainers
       responses:
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                type: boolean
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContainerModel"
+  /api/container/{id}:
+    get:
+      tags:
+        - Container
+      operationId: getContainer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ContainerModel"
 components:
-  schemas: {}
+  schemas:
+    ContainerModel:
+      required:
+        - created
+        - id
+        - image
+        - lastUpdated
+        - localEtag
+        - name
+        - remoteEtag
+        - updateAvailable
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        image:
+          type: string
+        updateAvailable:
+          type: boolean
+        localEtag:
+          type: string
+        remoteEtag:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time

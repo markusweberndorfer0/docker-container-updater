@@ -4,13 +4,15 @@ import Navbar from '@/components/NavbarComponent.vue';
 </script>
 
 <template>
-  <header>
-    <Navbar />
-  </header>
+  <div class="min-h-screen">
+    <header>
+      <Navbar />
+    </header>
 
-  <main>
-    <RouterView />
-  </main>
+    <main class="ml-[25%] w-[50%] mt-4">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>

@@ -44,7 +44,7 @@
     "postcss": "^8.4.49",
     "pre-commit": "^1.0.10",
     "prettier": "^3.4.2",
-    "sass": "^1.83.0",
+    "sass": "^1.83.4",
     "start-server-and-test": "^2.0.9",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.7.2",

@@ -14,7 +14,7 @@ node {
 tasks.register<NpmTask>("build") {
     args.set(listOf("run", "build"))
 
-    dependsOn("npm_install")
+    dependsOn("npm_install", "openApiGenerate")
 }
 
 openApiGenerate {

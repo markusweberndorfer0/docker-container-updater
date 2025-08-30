@@ -48,7 +48,7 @@ dependencies {
 	implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
 
 	// SSH Client
-	implementation("com.hierynomus:sshj:0.39.0")
+	implementation("com.hierynomus:sshj:0.40.0")
 
 	// Openapi docs
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.11")

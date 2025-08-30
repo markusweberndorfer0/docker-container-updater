@@ -82,7 +82,7 @@ class DockerServiceImpl(
 
             containers.add(
                 Container(
-                    id = -1,
+                    id = 0,
                     containerName = it.name,
                     containerImage = it.image,
                     updateAvailable = checkIfUpdateAvailable(localEtag, remoteEtag),

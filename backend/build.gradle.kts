@@ -45,7 +45,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
 	// Logging
-	implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
+	implementation("io.github.oshai:kotlin-logging-jvm:7.0.13")
 
 	// SSH Client
 	implementation("com.hierynomus:sshj:0.39.0")

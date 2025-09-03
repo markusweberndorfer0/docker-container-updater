@@ -51,7 +51,7 @@ dependencies {
 	implementation("com.hierynomus:sshj:0.40.0")
 
 	// Openapi docs
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.11")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12")
 }
 
 kotlin {

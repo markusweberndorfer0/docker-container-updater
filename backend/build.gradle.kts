@@ -3,7 +3,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 	kotlin("plugin.jpa") version "2.2.10"
 	kotlin("jvm") version "2.2.10"
-	kotlin("plugin.spring") version "2.2.10"
+	kotlin("plugin.spring") version "2.2.21"
 	id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
 
